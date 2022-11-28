@@ -1,76 +1,6 @@
-# MICCAI-Reproducibility-Checklist
-Submission for [MICCAI HACKATHON]( https://miccai-hackathon.com/#participate)
-
-**REPRODUCIBILITY 1: WHAT DOES IT NEED FOR A MICCAI PAPER TO BE REPRODUCIBLE?**
-
-1. Create a machine learning reproducibility checklist specific to MICCAI papers.
-2. Propose a machine learning code completeness checklist specific to MICCAI papers.
-3. How to ensure reproducibility when the data cannot be shared?
-
-# 1. Reproducibility checklist for machine learning-based MICCAI papers
-
-The checklist builds on the [machine learning reproducibility checklist](https://www.cs.mcgill.ca/~jpineau/ReproducibilityChecklist.pdf), but is specific to MICCAI papers.
-We also got lots of insights from
-
-- Mongan, J., Moy, L., & Kahn Jr, C. E. Checklist for Artificial Intelligence in Medical Imaging (CLAIM): A guide for authors and reviewers. Radiology: Artificial Intelligence, 2:2 (2020).
-- Norgeot, B., Quer, G., Beaulieu-Jones, B.K. et al. Minimum information about clinical artificial intelligence modeling: the MI-CLAIM checklist. Nature Medicine 26, 1320–1324 (2020).
-- Reproducibility Criteria in [ELNMP 2020](https://2020.emnlp.org/call-for-papers)
-
-## Methods
-
-- A clear description of the mathematical setting, algorithm, and/or model.
-- Network architecture details
-  - layer details in each block/module
-  - the number of parameters
-- Explanation of evaluation metrics (with links to code)
-
-## Experiments
-
-- Dataset
-  - for public dataset, providing data sources, e.g, references and URL links
-  - for private dataset, providing the data acquisition source and characteristics (e.g., device, contrast agent...), the eligibility description, the ground truth standard (e.g., qualifications and preparation of annotators), annotation tools, analysis of inter-rater variability
-  - details of train / validation / test splits
-- Preprocessing steps
-  - cropping strategy
-  - resampling method for anisotropic data
-  - intensity normalization method
-  - registration method for multi-sequence/modality data
-- Training protocols
-  - computing infrastructure (e.g., GPU name, number, memory)
-  - patch size and patch sampling strategy
-  - batch size
-  - optimizer, learning rate and its decay schedule 
-  - loss function 
-  - data augmentation methods
-  - stopping criteria, and optimal model selection criteria
-  - training time
-- Testing steps
-  - if using patch-based strategy, describing the patch aggregation method
-  - inference time
-- Postprocessing steps
-- Ablation study
-
-## Results
-
-- Quantitative analysis of cross validation results and/or testing set results
-  - average and standard deviation of evaluation metrics
-  - statistical analysis (e.g., statistical methods, significant levels...)
-
-- Qualitative analysis
-  - box/violin plot, ROC curves
-  - visualized examples of both successful and **failed** cases
-
-
-
-
-# 2. Code checklist for machine learning-based MICCAI papers
->A template README.md for code accompanying a Machine Learning-based MICCAI paper, which is built on [paperswithcode/releasing-research-code](https://github.com/paperswithcode/releasing-research-code).
->
->Dataset, preprocessing, posting processing sections are added because these parts are very important to reproduce the results in medical image analysis community.
-
 This repository is the official implementation of [My Paper Title](TBA). 
 
->Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
+
 
 ## Environments and Requirements
 
@@ -173,8 +103,4 @@ Our method achieves the following performance on [Brain Tumor Segmentation (BraT
 
 > We thank the contributors of public datasets. 
 
-
-# 3. How to ensure reproducibility when the data cannot be shared?
-
-- Try to find a related public dataset to evaluate your method, e.g., [The Cancer Imaging Archive](https://www.cancerimagingarchive.net/), [grand-challenge](https://grand-challenge.org/challenges/). If none of the public datasets can be used to evaluate your method, please explicitly claim it, which is very helpful for communities to create task-driven public datasets.
-- Create a docker container to pack and share the proposed method. Many MICCAI challenges have used the docker as the submission, e.g., [ADAM](http://adam.isi.uu.nl/methods/submit/), [M&Ms](https://www.ub.edu/mnms/)
+- https://www.ub.edu/mnms/)
