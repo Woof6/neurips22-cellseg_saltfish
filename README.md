@@ -1,15 +1,22 @@
 # Solution of Team saltfish for NeurIPS 2022 Cell Segmentation Challenge
 
-This repository is the official implementation of [My Paper Title](TBA). 
+This repository is the official implementation of our paper [My Paper Title](TBA). 
 
-
+You can reproduce our method as follows step by step:
 
 ## Environments and Requirements
 
-- Windows/Ubuntu version
-- CPU, RAM, GPU information
-- CUDA version
-- python version
+Our development environments:
+
+| System                  | Ubuntu 22.04.1 LTS                         |
+| ----------------------- | ------------------------------------------ |
+| CPU                     | Intel(R) Xeon(R) CPU E5-2695 v4 @ 2.10GHz  |
+| RAM                     | 16*×*4GB; 2.67MT*/*s                       |
+| GPU(number and type)    | Two NVIDIA Titan RTX 24G                   |
+| CUDA version            | 11.3                                       |
+| Programming language    | Python 3.10.4                              |
+| Deep learning framework | Pytorch (Torch 1.11.0, torchvision 0.12.0) |
+| Specific dependencies   | monai 0.9.0                                |
 
 To install requirements:
 
@@ -17,60 +24,66 @@ To install requirements:
 pip install -r requirements.txt
 ```
 
->Describe how to set up the environment, e.g. pip/conda/docker commands, download datasets, etc...
-
 
 
 ## Dataset
 
-- A link to download the data (if publicly available)
-- A description about how to prepare the data (e.g., folder structures)
+-  [NeurIPS 2022 Cell Segmentation Challenge official dataset](https://neurips22-cellseg.grand-challenge.org/dataset/). 
+
+
 
 ## Preprocessing
 
-A brief description of preprocessing method
+- Preprocess for images and labels:
 
-- cropping
-- intensity normalization
-- resampling
+  ```
+  python data_preprocess.py -i <path_to_original_data> -o <path_to_processed_data>
+  ```
 
-Running the data preprocessing code:
+- Preprocess for distance transform:
 
-```python
-python preprocessing.py --input_path <path_to_input_data> --output_path <path_to_output_data>
-```
+  ```
+  python dist_transform_preprocess.py --data_path <path_to_processed_data> --data_ori_path <path_to_original_data> --save_path <path_to_distance_transform>
+  ```
+
+
 
 ## Training
 
-To train the model(s) in the paper, run this command:
+To train the models in the paper, run this command respectively:
 
-```train
-python train.py --input-data <path_to_data> --alpha 10 --beta 20
-```
+- resnet50 backbone:
 
->Describe how to train the models, with example commands, including the full training procedure and appropriate hyper-parameters.
+  ```
+  python train.py --data_path <path_to_processed_data> --weight_path <path_to_distance_transform> --model_name "res50_unetr"
+  ```
 
+- resnet50wide backbone:
 
+  ```
+  python train.py --data_path <path_to_processed_data> --weight_path <path_to_distance_transform> --model_name "res50wt_unetr"
+  ```
+
+Then we get two models saved in "./work_dir/res50_unetr" and "./work_dir/res50wt_unetr" respectively.
+
+ 
 
 ## Trained Models
 
-You can download trained models here:
+You can download models trained on the above dataset with the above code here:
 
-- [My awesome model](https://drive.google.com/mymodel.pth) trained on the above dataset with the above code. 
-
->Give a link to where/how the trained models can be downloaded.
+- [res50_unetr](https://github.com/Woof6/neurips22-cellseg_saltfish/releases/tag/pth1) 
+- [res50wt_unetr](https://github.com/Woof6/neurips22-cellseg_saltfish/releases/tag/pth))
 
 
 
 ## Inference
 
-To infer the testing cases, run this command:
+If you have gotten two trained models saved  in "./work_dir/res50_unetr" and "./work_dir/res50wt_unetr" respectively, you can infer the testing cases by running this command:
 
 ```python
-python inference.py --input-data <path_to_data> --model_path <path_to_trained_model> --output_path <path_to_output_data>
+python predict.py -i <path_to_data> -o <path_to_inference_results>
 ```
-
-> Describe how to infer on testing cases with the trained models.
 
 
 
@@ -79,30 +92,29 @@ python inference.py --input-data <path_to_data> --model_path <path_to_trained_mo
 To compute the evaluation metrics, run:
 
 ```eval
-python eval.py --seg_data <path_to_inference_results> --gt_data <path_to_ground_truth>
+python eval_f1.py --seg_path <path_to_inference_results> --gt_path <path_to_ground_truth>
 ```
-
->Describe how to evaluate the inference results and obtain the reported results in the paper.
 
 
 
 ## Results
 
-Our method achieves the following performance on [Brain Tumor Segmentation (BraTS) Challenge](https://www.med.upenn.edu/cbica/brats2020/)
+Our method achieves the following performance on tunning set of [NeurIPS 2022 Cell Segmentation Challenge](https://neurips22-cellseg.grand-challenge.org/):
 
-| Model name       |  DICE  | 95% Hausdorff Distance |
-| ---------------- | :----: | :--------------------: |
-| My awesome model | 90.68% |         32.71          |
+- Performance evaluation
 
->Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
+  | Method | Res50  | Res50wt | Complete model |
+  | ------ | ------ | ------- | -------------- |
+  | F1     | 0.8162 | 0.8211  | 0.8250         |
+
+- Efficiency evaluation
+
+  | Resolution   | Docker inference time(s) | GPU Memory(MiB) |
+  | ------------ | ------------------------ | --------------- |
+  | 640*×*480    | 9.67                     | 2884            |
+  | 1024*×*1024  | 10.35                    | 3024            |
+  | 3000*×*3000  | 18.56                    | 5886            |
+  | 8415*×*10496 | 74.16                    | 8592            |
 
 
-## Contributing
 
->Pick a licence and describe how to contribute to your code repository. 
-
-## Acknowledgement
-
-> We thank the contributors of public datasets. 
-
-- https://www.ub.edu/mnms/)
