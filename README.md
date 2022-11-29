@@ -1,6 +1,6 @@
 # Solution of Team saltfish for NeurIPS 2022 Cell Segmentation Challenge
 
-This repository is the official implementation of our paper [My Paper Title](TBA). 
+This repository is the official implementation of our paper [Dual-decoder U-net for General Cell Segmentation](TBA). 
 
 You can reproduce our method as follows step by step:
 
