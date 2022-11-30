@@ -1,6 +1,7 @@
 # Solution of Team saltfish for NeurIPS 2022 Cell Segmentation Challenge
 
-This repository is the official implementation of our paper [A solution by saltfish](TBA). 
+This repository is the official implementation of our paper [MAUNet: Modality-Aware Anti-Ambiguity U-Net for
+Multi-Modality Cell Segmentation](TBA). 
 
 You can reproduce our method as follows step by step:
 
