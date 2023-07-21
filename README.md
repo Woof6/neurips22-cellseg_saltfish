@@ -88,6 +88,12 @@ If you have gotten two trained models saved  in "./work_dir/res50_unetr" and "./
 python predict.py -i <path_to_data> -o <path_to_inference_results>
 ```
 
+Docker  container link:[Docker Hub](https://hub.docker.com/repository/docker/woof4/saltfish/general)
+
+```
+docker container run --gpus "device=0" -m 28G --name saltfish --rm -v $PWD/CellSeg_Test/:/workspace/inputs/ -v $PWD/saltfish_seg/:/workspace/outputs/ saltfish:latest /bin/bash -c "sh predict.sh"
+```
+
 
 
 ## Evaluation
