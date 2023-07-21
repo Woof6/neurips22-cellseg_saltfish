@@ -102,6 +102,9 @@ def main():
     parser.add_argument("--epoch_tolerance", default=100, type=int)
     parser.add_argument("--initial_lr", type=float, default=6e-4, help="learning rate")
 
+    
+    parser.add_argument("--pre_trained_model_path", type=str, default=None, help="pretrain_model")
+    
     args = parser.parse_args()
 
     monai.config.print_config()
@@ -248,6 +251,9 @@ def main():
                 feature_size=64,  # should be divisible by 12
                 spatial_dims=2,
             ).to(device) 
+    if args.pre_trained_model_path != None:
+        checkpoint = torch.load(join(args.pre_trained_model_path, 'best_Dice_model.pth'), map_location=torch.device(device))
+        model.load_state_dict(checkpoint['model_state_dict'])
         
     loss_function = monai.losses.DiceFocalLoss(softmax = False)
     loss_function2 = wL1Loss()
