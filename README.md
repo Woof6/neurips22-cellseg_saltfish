@@ -69,7 +69,21 @@ To train the models in the paper, run this command respectively:
 
 Then we get two models saved in "./work_dir/res50_unetr" and "./work_dir/res50wt_unetr" respectively.
 
- 
+To fine-tune the model on a customized dataset, please preprocess the dataset with the above command first , then run this command:
+
+- resnet50 backbone:
+
+  ```
+  python train.py --data_path <path_to_processed_data> --weight_path <path_to_distance_transform> --model_name "res50_unetr" --pre_trained_model_path ./work_dir/res50_unetr
+  ```
+
+- resnet50wide backbone:
+
+  ```
+  python train.py --data_path <path_to_processed_data> --weight_path <path_to_distance_transform> --model_name "res50wt_unetr" --pre_trained_model_path ./work_dir/res50wt_unetr
+  ```
+
+
 
 ## Trained Models
 
@@ -93,6 +107,8 @@ Docker  container link:[Docker Hub](https://hub.docker.com/repository/docker/woo
 ```
 docker container run --gpus "device=0" -m 28G --name saltfish --rm -v $PWD/CellSeg_Test/:/workspace/inputs/ -v $PWD/saltfish_seg/:/workspace/outputs/ saltfish:latest /bin/bash -c "sh predict.sh"
 ```
+
+[Google Drive](https://drive.google.com/drive/folders/1ZL3EOpp4XkkagBgQkPV2FyH1zKSFYb95?usp=sharing) jupyter notebook for inference on colab
 
 
 
