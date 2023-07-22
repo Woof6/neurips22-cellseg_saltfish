@@ -1,3 +1,5 @@
+[![Security Status](https://www.murphysec.com/platform3/v31/badge/1682423519889874944.svg)](https://www.murphysec.com/console/report/1682423519839543296/1682423519889874944)
+
 # Solution of Team saltfish for NeurIPS 2022 Cell Segmentation Challenge
 
 This repository is the official implementation of our paper [MAUNet: Modality-Aware Anti-Ambiguity U-Net for
@@ -143,5 +145,4 @@ Our method achieves the following performance on tunning set of [NeurIPS 2022 Ce
 
 
 
-[![Security Status](https://www.murphysec.com/platform3/v31/badge/1682423519889874944.svg)](https://www.murphysec.com/console/report/1682423519839543296/1682423519889874944)
 
