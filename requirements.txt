@@ -10,3 +10,5 @@ tqdm
 psutil
 pandas
 einops
+imagecodecs
+opencv-python
